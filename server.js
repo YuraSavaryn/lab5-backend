@@ -12,7 +12,7 @@ const db = admin.firestore();
 
 const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(express.static(path.join(__dirname, './dist')));
 
 const verifyToken = async (req, res, next) => {
     const token = req.headers.authorization?.split("Bearer ")[1];
@@ -29,10 +29,6 @@ const verifyToken = async (req, res, next) => {
         return res.status(401).json({ message: "Unauthorized" });
     }
 };
-
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}!`);
-});
 
 app.get("/api/protected", verifyToken, (req, res) => {
     res.json({ message: "You have accessed a protected route!", user: req.user });
@@ -313,4 +309,13 @@ app.post("/api/update-project-status", verifyToken, async (req, res) => {
         console.error("Error updating project status:", error);
         res.status(500).json({ message: "Failed to update project status", error: error.message });
     }
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'path/to/your/dist/index.html'));
+});
+
+
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}!`);
 });
