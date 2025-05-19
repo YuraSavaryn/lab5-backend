@@ -312,7 +312,7 @@ app.post("/api/update-project-status", verifyToken, async (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'path/to/your/dist/index.html'));
+  res.sendFile(path.join(__dirname, './dist/index.html'));
 });
 
 
