@@ -30,7 +30,7 @@ const verifyToken = async (req, res, next) => {
     }
 };
 
-app.listen(PORT, () => {
+app.listen(port, () => {
     console.log(`Server is running on port ${port}!`);
 });
 
